@@ -1,7 +1,6 @@
 import Koa from 'koa';
 import logger from 'koa-logger';
 import serve from 'koa-static';
-import send from 'koa-send';
 
 import Router from 'koa-router';
 
