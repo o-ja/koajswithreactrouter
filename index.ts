@@ -6,10 +6,8 @@ import { createReadStream } from 'fs';
 const __dirname = path.resolve();
 
 import Router from 'koa-router';
-const staticDirPath = path.join(__dirname, '/frontend');
 
 const app = new Koa();
-const ui = new Koa();
 
 const router = new Router();
 
@@ -21,12 +19,12 @@ router.get('/api', async (ctx) => {
   ctx.body = 'Hello API!';
 });
 
-app.use(serve(__dirname + '/frontend'));
-
-router.all('(.*)', async (ctx, next) => {
+router.get('(.*)', async (ctx) => {
   ctx.type = 'html';
   ctx.body = createReadStream(__dirname + '/frontend/index.html');
 });
+
+app.use(serve(__dirname + '/frontend'));
 
 app.use(router.routes());
 
